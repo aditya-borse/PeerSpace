@@ -10,7 +10,6 @@
     {% else %}
     <title>Welcome to PeerSpace</title>
     {% endif %}
-    <link rel="stylesheet" href="../static/styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
@@ -28,15 +27,15 @@
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
                                 <a href="{{ url_for('index') }}"
-                                    class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                                    class="{% if request.endpoint == 'index' %}bg-gray-700 text-white{% else %}text-gray-300 hover:bg-gray-700 hover:text-white{% endif %} px-3 py-2 rounded-md text-sm font-medium">Home</a>
                                 {% if current_user.is_anonymous %}
                                 <a href="{{ url_for('login') }}"
-                                    class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
+                                    class="{% if request.endpoint == 'login' %}bg-gray-700 text-white{% else %}text-gray-300 hover:bg-gray-700 hover:text-white{% endif %} px-3 py-2 rounded-md text-sm font-medium">Login</a>
                                 {% else %}
                                 <a href="{{ url_for('explore') }}"
-                                    class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Explore</a>
+                                    class="{% if request.endpoint == 'explore' %}bg-gray-700 text-white{% else %}text-gray-300 hover:bg-gray-700 hover:text-white{% endif %} px-3 py-2 rounded-md text-sm font-medium">Explore</a>
                                 <a href="{{ url_for('user', username=current_user.username) }}"
-                                    class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Profile</a>
+                                    class="{% if request.endpoint == 'user' %}bg-gray-700 text-white{% else %}text-gray-300 hover:bg-gray-700 hover:text-white{% endif %} px-3 py-2 rounded-md text-sm font-medium">Profile</a>
                                 {% endif %}
                             </div>
                         </div>
@@ -44,7 +43,7 @@
                     {% if not current_user.is_anonymous %}
                     <div class="hidden md:block">
                         <a href="{{ url_for('logout') }}"
-                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</a>
+                            class="{% if request.endpoint == 'logout' %}bg-gray-700 text-white{% else %}text-gray-300 hover:bg-gray-700 hover:text-white{% endif %} px-3 py-2 rounded-md text-sm font-medium">Logout</a>
                     </div>
                     {% endif %}
                     <div class="-mr-2 flex md:hidden">

@@ -48,7 +48,7 @@
         {% if user == current_user %}
         <a
           href="{{ url_for('edit_profile') }}"
-          class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium shadow-md hover:bg-blue-500"
+          class="bg-blue-500 text-white px-4 py-2 rounded-md text-sm font-medium shadow-md hover:bg-blue-600"
           >Edit Profile</a
         >
         {% elif not current_user.is_following(user) %}
