@@ -4,6 +4,7 @@ from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, Le
 import sqlalchemy as sa
 from app import db
 from app.models import User
+import re
 
 
 class LoginForm(FlaskForm):
@@ -26,14 +27,14 @@ class RegistrationForm(FlaskForm):
         user = db.session.scalar(sa.select(User).where(User.username == username.data))
         if user is not None:
             raise ValidationError('Please use a different username')
+        if not re.match(r'^[a-zA-Z0-9_]+$', username.data):
+            raise ValidationError('Please use only letters, numbers, and underscores in your username.')
+        
         
     def validate_email(self, email):
         user = db.session.scalar(sa.select(User).where(User.email == email.data))
         if user is not None:
             raise ValidationError('Please use a different email address.')
-        email_domain = email.data.split('@')[1]
-        if email_domain not in ['kkwagh.edu.in']:
-            raise ValidationError('Please use a valid college email address. Only live for students of KKWIEER.')
         
 
 class EditProfileForm(FlaskForm):
