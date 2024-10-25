@@ -31,6 +31,9 @@ class RegistrationForm(FlaskForm):
         user = db.session.scalar(sa.select(User).where(User.email == email.data))
         if user is not None:
             raise ValidationError('Please use a different email address.')
+        email_domain = email.data.split('@')[1]
+        if email_domain not in ['kkwagh.edu.in']:
+            raise ValidationError('Please use a valid college email address. Only live for students of KKWIEER.')
         
 
 class EditProfileForm(FlaskForm):
