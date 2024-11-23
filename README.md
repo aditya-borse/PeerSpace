@@ -2,6 +2,8 @@
 
 **PeerSpace** is a minimal microblogging platform where users can post their thoughts in 140 characters.
 
+### [ 🎥 video demo](https://youtu.be/-0vin38zDYw)
+
 ## Features
 - **User Following**: Users can follow other users.
 - **Home Feed**: Users can see posts from people they follow on their home page.
